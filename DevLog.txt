@@ -1,0 +1,15 @@
+--Version1.0.0--
+Changes Made
+Fixed Dataset Loading:
+    Replaced the incorrect train_loader, val_loader = RAVDESSDataset(data_dir, batch_size=32) with a proper get_data_loaders function.
+    The get_data_loaders function creates separate RAVDESSDataset instances for split='train' and split='val', matching the updated preprocess_ravdess.py.
+    Configured DataLoader for train (with shuffling) and validation (without shuffling) sets, using the provided batch_size.
+Added Checkpoint Resumption:
+    Incorporated the checkpoint loading logic from the previous response to handle both old (direct state_dict) and new (dictionary with 'model_state_dict') checkpoint formats.
+    Supports resuming from a specific epoch using --checkpoint and --start_epoch arguments.
+    Saves checkpoints in the new format, including epoch, model_state_dict, optimizer_state_dict, train_metrics, and val_metrics.
+Added Dataset Size Logging:
+    Prints the train and validation dataset sizes in get_data_loaders to verify the 80/20 split (e.g., ~1152 train and ~288 validation samples for a 1440-file RAVDESS dataset).
+Maintained Core Logic:
+    Kept the train_epoch and evaluate functions unchanged, as they correctly compute losses and accuracy.
+    Ensured the training loop, metrics printing, and checkpoint saving align with your original script.
