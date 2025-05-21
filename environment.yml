@@ -1,3 +1,4 @@
+#For Window
 name: VAE-Emotion-Detection
 channels:
   - defaults
