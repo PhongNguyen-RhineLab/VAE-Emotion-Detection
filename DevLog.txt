@@ -13,3 +13,7 @@ Added Dataset Size Logging:
 Maintained Core Logic:
     Kept the train_epoch and evaluate functions unchanged, as they correctly compute losses and accuracy.
     Ensured the training loop, metrics printing, and checkpoint saving align with your original script.
+
+--Version1.0.1--
+Change Made
+Better support colab run
