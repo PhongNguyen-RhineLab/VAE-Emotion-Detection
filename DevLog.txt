@@ -17,3 +17,6 @@ Maintained Core Logic:
 --Version1.0.1--
 Change Made
 Better support colab run
+
+--Version1.0.2--
+Update readme
