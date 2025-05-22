@@ -82,9 +82,22 @@ class RAVDESSDataset(Dataset):
         return mfcc, label
 
 
+def get_data_loaders(data_dir, batch_size=32, n_mfcc=13, max_frames=100):
+    train_dataset = RAVDESSDataset(data_dir, n_mfcc=n_mfcc, max_frames=max_frames, split='train')
+    val_dataset = RAVDESSDataset(data_dir, n_mfcc=n_mfcc, max_frames=max_frames, split='val')
+
+    train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+    val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=batch_size, shuffle=False)
+
+    print(f"Train dataset size: {len(train_dataset)}")
+    print(f"Validation dataset size: {len(val_dataset)}")
+
+    return train_loader, val_loader
+
+
 if __name__ == "__main__":
     # Test the dataset
-    dataset = RAVDESSDataset(data_dir="./archive/audio_speech_actors_01-24", n_mfcc=13, max_frames=100, split='train')
+    dataset = RAVDESSDataset(data_dir="RAVDESS/audio_speech_actors_01-24", n_mfcc=13, max_frames=100, split='train')
     mfcc, label = dataset[0]
     print(f"MFCC shape: {mfcc.shape}")  # Should print: torch.Size([1, 13, 100])
     print(f"Label: {label}")

@@ -35,15 +35,27 @@ This project implements a Variational Autoencoder (VAE) with emotion classificat
 
 #### To start training from scratch use:
 
-`python VAE_train_extra.py --data_dir ./archive/audio_speech_actors_01-24 --epochs 50 --batch_size 32`
+#### For RAVDESS:
 
-#### For Colab
+`python VAE_train_extra.py --dataset ravdess --data_dir ./RAVDESS/audio_speech_actors_01-24 --epochs 50 --batch_size 32`
 
-`!python /content/VAE-Emotion-Detection/Colab-Support/VAE_train.py --data_dir /content/VAE-Emotion-Detection/archive/audio_speech_actors_01-24 --epochs 50 --batch_size 32`
+~~`python VAE_train_extra.py --data_dir ./archive/audio_speech_actors_01-24 --epochs 50 --batch_size 32`~~
 
-* Saves checkpoints to ./epoch/vae_epoch_N.pth.
+Colab
+
+`!python /content/VAE-Emotion-Detection/Colab-Support/VAE_train_extra.py --data_dir /content/VAE-Emotion-Detection/RAVDESS/audio_speech_actors_01-24 --epochs 50 --batch_size 32`
+
+* Saves checkpoints to ./Checkpoint/vae_epoch_N.pth.
 
 * Prints metrics per epoch.
+
+#### For CREMAD:
+
+`python VAE_train_extra.py --dataset cremad --data_dir ./CREMA-D --epochs 50 --batch_size 32`
+
+Colab
+
+`!python VAE_train_extra.py --dataset cremad --data_dir ./CREMA-D --epochs 50 --batch_size 32`
 
 #### To continue training a checkpoint use
 

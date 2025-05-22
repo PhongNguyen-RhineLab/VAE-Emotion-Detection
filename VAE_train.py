@@ -88,7 +88,7 @@ def main():
     parser.add_argument('--epochs', type=int, default=50, help='Number of epochs to train')
     parser.add_argument('--batch_size', type=int, default=32, help='Batch size')
     parser.add_argument('--checkpoint', type=str, default=None, help='Path to checkpoint to resume training')
-    parser.add_argument('--start_epoch', type=int, default=0, help='Starting epoch (0-based)')
+    parser.add_argument('--start_epoch', type=int, default=0, help='Starting Checkpoint (0-based)')
     args = parser.parse_args()
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -103,13 +103,13 @@ def main():
             # New checkpoint format
             model.load_state_dict(checkpoint['model_state_dict'])
             optimizer.load_state_dict(checkpoint.get('optimizer_state_dict', optimizer.state_dict()))
-            start_epoch = checkpoint.get('epoch', args.start_epoch) + 1
-            print(f"Resuming training from epoch {start_epoch} (new checkpoint format)")
+            start_epoch = checkpoint.get('Checkpoint', args.start_epoch) + 1
+            print(f"Resuming training from Checkpoint {start_epoch} (new checkpoint format)")
         else:
             # Old checkpoint format (direct state_dict)
             model.load_state_dict(checkpoint)
             start_epoch = args.start_epoch + 1
-            print(f"Resuming training from epoch {start_epoch} (old checkpoint format)")
+            print(f"Resuming training from Checkpoint {start_epoch} (old checkpoint format)")
     else:
         start_epoch = args.start_epoch
 
@@ -127,12 +127,12 @@ def main():
 
         # Save checkpoint
         torch.save({
-            'epoch': epoch,
+            'Checkpoint': epoch,
             'model_state_dict': model.state_dict(),
             'optimizer_state_dict': optimizer.state_dict(),
             'train_metrics': train_metrics,
             'val_metrics': val_metrics
-        }, f"./epoch/vae_epoch_{epoch + 1}.pth")
+        }, f"Checkpoint/vae_epoch_{epoch + 1}.pth")
 
 
 if __name__ == "__main__":

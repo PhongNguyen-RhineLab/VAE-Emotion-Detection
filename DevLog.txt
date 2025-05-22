@@ -20,3 +20,25 @@ Better support colab run
 
 --Version1.0.2--
 Update readme
+
+--Version1.1.0--
+Changes Made:
+
+Restored get_data_loaders in preprocess_ravdess.py:
+    Added get_data_loaders function to your provided RAVDESSDataset implementation, creating DataLoader objects for train (~1,152 samples) and validation (~288 samples). This fixes the import error in VAE_train_extra.py (from preprocess_ravdess import get_data_loaders as get_ravdess_loaders).
+    Kept your RAVDESSDataset unchanged, preserving 13 MFCCs, 22050 Hz, 100 frames, 8 emotions, and specific parameters (n_fft=2048, hop_length=512).
+Added CREMA-D Support with preprocess_cremad.py:
+    Retained the separate preprocess_cremad.py for CREMA-D (7,442 files, 6 emotions: neutral, happy, sad, angry, fearful, disgust), with get_data_loaders for ~5,953 train and ~1,489 validation samples.
+    Noted minor MFCC parameter difference (CREMA-D uses default librosa settings vs. RAVDESS’s n_fft=2048, hop_length=512) and suggested aligning for consistency.
+Updated VAE_train_extra.py:
+    Confirmed compatibility with restored preprocess_ravdess.get_data_loaders and preprocess_cremad.get_data_loaders.
+    Maintained dual-dataset support via --dataset argument (ravdess or cremad), setting num_emotions dynamically (8 or 6).
+    Kept random seeds for PC vs. Colab consistency.
+Kept vae_emotion_recognition.py and infer_ravdess.py Unchanged:
+    Both support dynamic num_emotions and dual datasets, requiring no modifications.
+Updated Documentation:
+    Revised Emotion_VAE_Documentation.md to reflect fixed RAVDESS data loader, CREMA-D support, and troubleshooting steps (e.g., latent_dim=64, dropout, beta=0.5).
+    Updated README.md with clear instructions for both datasets and Conda setup.
+Addressed Low RAVDESS Accuracy (33.33%) and PC vs. Colab:
+    Suggested tuning: increase latent_dim=64, add dropout to classifier, use beta=0.5.
+    Reinforced environment.yml and random seeds to minimize PC vs. Colab differences.
