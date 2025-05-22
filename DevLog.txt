@@ -42,3 +42,6 @@ Updated Documentation:
 Addressed Low RAVDESS Accuracy (33.33%) and PC vs. Colab:
     Suggested tuning: increase latent_dim=64, add dropout to classifier, use beta=0.5.
     Reinforced environment.yml and random seeds to minimize PC vs. Colab differences.
+
+--Version1.1.1--
+Small fix and refactor
